@@ -149,6 +149,10 @@ jobs:
             variant: nonfree 7.0 optv3
           - target: linux64
             variant: nonfree 7.0 optv3 lto
+          - target: linux64
+            variant: nonfree 7.0 optv3
+          - target: linux64
+            variant: nonfree 7.0 lto
     steps:
       - name: Free Disk-Space
         run: df -h && sudo apt-get clean && docker system prune -a -f && sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc && df -h
@@ -217,6 +221,10 @@ jobs:
             variant: nonfree 7.0 optv3
           - target: linux64
             variant: nonfree 7.0 optv3 lto
+          - target: linux64
+            variant: nonfree 7.0 optv3
+          - target: linux64
+            variant: nonfree 7.0 lto
     steps:
       - name: Free Disk-Space
         run: df -h && sudo apt-get clean && docker system prune -a -f && sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc && df -h
