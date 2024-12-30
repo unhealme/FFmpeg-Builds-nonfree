@@ -70,7 +70,7 @@ if [[ "${TARGET}" == win* ]]; then
     docker run --rm -i $TTY_ARG "${UIDARGS[@]}" -v "${ARTIFACTS_PATH}":/out -v "${PWD}/${BUILD_NAME}":"/${BUILD_NAME}" -w / "$IMAGE" zip -9 -r "/out/${OUTPUT_FNAME}" "$BUILD_NAME"
 else
     OUTPUT_FNAME="${BUILD_NAME}.tar.zst"
-    docker run --rm -i $TTY_ARG "${UIDARGS[@]}" -v "${ARTIFACTS_PATH}":/out -v "${PWD}/${BUILD_NAME}":"/${BUILD_NAME}" -w / "$IMAGE" ZSTD_CLEVEL=19 ZSTD_NBTHREADS=0 tar -cf --zstd "/out/${OUTPUT_FNAME}" "$BUILD_NAME"
+    docker run --rm -i $TTY_ARG "${UIDARGS[@]}" -v "${ARTIFACTS_PATH}":/out -v "${PWD}/${BUILD_NAME}":"/${BUILD_NAME}" -e ZSTD_CLEVEL=19 -e ZSTD_NBTHREADS=0 -w / "$IMAGE" tar -cf --zstd "/out/${OUTPUT_FNAME}" "$BUILD_NAME"
 fi
 cd -
 
