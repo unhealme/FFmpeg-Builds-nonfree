@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/xiph/rav1e.git"
-SCRIPT_COMMIT="c7c72b5530e391211c5d5f32b16394d1c7dc00cc"
+SCRIPT_COMMIT="0b743163beb4a981fc8855f6e44ef0662025bd4e"
 
 ffbuild_enabled() {
     [[ $TARGET == win32 ]] && return -1
@@ -20,6 +20,9 @@ ffbuild_dockerbuild() {
     # Pulls in target-libs for host tool builds otherwise.
     # Luckily no target libraries are needed.
     unset PKG_CONFIG_LIBDIR
+
+    # The pinned version is broken, and upstream does not react
+    cargo update cc
 
     cargo cinstall -v "${myconf[@]}"
 

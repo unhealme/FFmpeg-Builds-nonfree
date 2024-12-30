@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/libjxl/libjxl.git"
-SCRIPT_COMMIT="03e9192369c8d11131b23ccdec1a25e0a7e14b44"
+SCRIPT_COMMIT="8a39b30133c880c873ca7e2bd0911f5c8dcda49f"
 
 ffbuild_enabled() {
     [[ $ADDINS_STR == *4.4* ]] && return -1

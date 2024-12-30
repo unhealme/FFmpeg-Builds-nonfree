@@ -1,42 +1,46 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/harfbuzz/harfbuzz.git"
-SCRIPT_COMMIT="ba1f194a1d62164be439a7f1f8ed9a87da9f7061"
+SCRIPT_COMMIT="5e584ee7d90d767e1d68030aa2b04b950a0bc9f9"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
+    mkdir build && cd build
+
     local myconf=(
+        --cross-file=/cross.meson
         --prefix="$FFBUILD_PREFIX"
-        --disable-shared
-        --enable-static
-        --with-pic
+        --buildtype=release
+        --default-library=static
+        -Dfreetype=enabled
+        -Dglib=disabled
+        -Dgobject=disabled
+        -Dcairo=disabled
+        -Dchafa=disabled
+        -Dtests=disabled
+        -Dintrospection=disabled
+        -Ddocs=disabled
+        -Ddoc_tests=false
+        -Dutilities=disabled
     )
 
-    if [[ $TARGET == win* || $TARGET == linux* ]]; then
+    if [[ $TARGET == win* ]]; then
         myconf+=(
-            --host="$FFBUILD_TOOLCHAIN"
+            -Dgdi=enabled
         )
-    else
-        echo "Unknown target"
-        return -1
     fi
 
-    export LIBS="-lpthread"
-
-    ./autogen.sh "${myconf[@]}"
-    make -j$(nproc)
-    make install
+    meson setup "${myconf[@]}" ..
+    ninja -j"$(nproc)"
+    ninja install
 
     echo "Libs.private: -lpthread" >> "$FFBUILD_PREFIX"/lib/pkgconfig/harfbuzz.pc
 }
 
 ffbuild_configure() {
-    [[ $ADDINS_STR == *4.4* ]] && return 0
-    [[ $ADDINS_STR == *5.0* ]] && return 0
-    [[ $ADDINS_STR == *5.1* ]] && return 0
-    [[ $ADDINS_STR == *6.0* ]] && return 0
+    (( $(ffbuild_ffver) > 600 )) || return 0
     echo --enable-libharfbuzz
 }
