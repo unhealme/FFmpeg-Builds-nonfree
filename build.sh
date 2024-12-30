@@ -10,10 +10,10 @@ for addin in ${ADDINS[*]}; do
     source "addins/${addin}.sh"
 done
 
-if docker info -f "{{println .SecurityOptions}}" | grep rootless >/dev/null 2>&1; then
+if docker info -f "{{println .SecurityOptions}}" | grep rootless > /dev/null 2>&1; then
     UIDARGS=()
 else
-    UIDARGS=( -u "$(id -u):$(id -g)" )
+    UIDARGS=(-u "$(id -u):$(id -g)")
 fi
 
 rm -rf ffbuild
@@ -27,7 +27,7 @@ GIT_BRANCH="${GIT_BRANCH_OVERRIDE:-$GIT_BRANCH}"
 BUILD_SCRIPT="$(mktemp)"
 trap "rm -f -- '$BUILD_SCRIPT'" EXIT
 
-cat <<EOF >"$BUILD_SCRIPT"
+cat << EOF > "$BUILD_SCRIPT"
     set -xe
     cd /ffbuild
     rm -rf ffmpeg prefix
@@ -69,8 +69,8 @@ if [[ "${TARGET}" == win* ]]; then
     OUTPUT_FNAME="${BUILD_NAME}.zip"
     docker run --rm -i $TTY_ARG "${UIDARGS[@]}" -v "${ARTIFACTS_PATH}":/out -v "${PWD}/${BUILD_NAME}":"/${BUILD_NAME}" -w / "$IMAGE" zip -9 -r "/out/${OUTPUT_FNAME}" "$BUILD_NAME"
 else
-    OUTPUT_FNAME="${BUILD_NAME}.tar.xz"
-    docker run --rm -i $TTY_ARG "${UIDARGS[@]}" -v "${ARTIFACTS_PATH}":/out -v "${PWD}/${BUILD_NAME}":"/${BUILD_NAME}" -w / "$IMAGE" tar cJf "/out/${OUTPUT_FNAME}" "$BUILD_NAME"
+    OUTPUT_FNAME="${BUILD_NAME}.tar.zst"
+    docker run --rm -i $TTY_ARG "${UIDARGS[@]}" -v "${ARTIFACTS_PATH}":/out -v "${PWD}/${BUILD_NAME}":"/${BUILD_NAME}" -w / "$IMAGE" ZSTD_CLEVEL=19 ZSTD_NBTHREADS=0 tar -cf --zstd "/out/${OUTPUT_FNAME}" "$BUILD_NAME"
 fi
 cd -
 
