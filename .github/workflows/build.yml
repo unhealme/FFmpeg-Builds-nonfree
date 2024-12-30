@@ -146,17 +146,17 @@ jobs:
       matrix:
         include:
           - target: win64
-            variant: nonfree 7.0 optv3
+            variant: nonfree 7.1 optv3
           - target: win64
-            variant: nonfree 7.0
+            variant: nonfree 7.1
           - target: linux64
-            variant: nonfree 7.0 optv3 lto
+            variant: nonfree 7.1 optv3 lto
           - target: linux64
-            variant: nonfree 7.0 optv3
+            variant: nonfree 7.1 optv3
           - target: linux64
-            variant: nonfree 7.0 lto
+            variant: nonfree 7.1 lto
           - target: linux64
-            variant: nonfree 7.0
+            variant: nonfree 7.1
     steps:
       - name: Free Disk-Space
         run: df -h && sudo apt-get clean && docker system prune -a -f && sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc && df -h
@@ -222,17 +222,17 @@ jobs:
       matrix:
         include:
           - target: win64
-            variant: nonfree 7.0 optv3
+            variant: nonfree 7.1 optv3
           - target: win64
-            variant: nonfree 7.0
+            variant: nonfree 7.1
           - target: linux64
-            variant: nonfree 7.0 optv3 lto
+            variant: nonfree 7.1 optv3 lto
           - target: linux64
-            variant: nonfree 7.0 optv3
+            variant: nonfree 7.1 optv3
           - target: linux64
-            variant: nonfree 7.0 lto
+            variant: nonfree 7.1 lto
           - target: linux64
-            variant: nonfree 7.0
+            variant: nonfree 7.1
     steps:
       - name: Free Disk-Space
         run: df -h && sudo apt-get clean && docker system prune -a -f && sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc && df -h
