@@ -26,7 +26,7 @@ while [[ $# -gt 0 ]]; do
 
         if [[ $INPUT == *.zip ]]; then
             unzip "$INPUT" -d "$REPACK_DIR"
-        elif [[ $INPUT == *.tar.zst ]]; then
+        elif [[ $INPUT == *.tar.xz ]]; then
             tar xvaf "$INPUT" -C "$REPACK_DIR"
         else
             echo "Unknown input file type: $INPUT"
