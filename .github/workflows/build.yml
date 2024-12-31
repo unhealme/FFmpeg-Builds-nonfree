@@ -146,8 +146,6 @@ jobs:
       matrix:
         include:
           - target: win64
-            variant: nonfree 7.1 optv3
-          - target: win64
             variant: nonfree 7.1
           - target: linux64
             variant: nonfree 7.1 optv3 lto
@@ -221,8 +219,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - target: win64
-            variant: nonfree 7.1 optv3
           - target: win64
             variant: nonfree 7.1
           - target: linux64
