@@ -144,17 +144,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        target: [linux64]
+        variant:
+          [
+            nonfree 7.1 extopt lto extlto,
+            nonfree 7.1 extopt lto,
+            nonfree 7.1 extopt,
+            nonfree 7.1 lto extlto,
+            nonfree 7.1 lto,
+            nonfree 7.1 marchv3 extopt lto extlto,
+            nonfree 7.1 marchv3 extopt lto,
+            nonfree 7.1 marchv3 extopt,
+            nonfree 7.1 marchv3 lto extlto,
+            nonfree 7.1 marchv3 lto,
+            nonfree 7.1 marchv3,
+            nonfree 7.1,
+          ]
         include:
           - target: win64
             variant: nonfree 7.1
-          - target: linux64
-            variant: nonfree 7.1 optv3 lto
-          - target: linux64
-            variant: nonfree 7.1 optv3
-          - target: linux64
-            variant: nonfree 7.1 lto
-          - target: linux64
-            variant: nonfree 7.1
+          - target: win64
+            variant: nonfree 7.1 marchv3
+          - target: win64
+            variant: nonfree 7.1 extopt
+          - target: win64
+            variant: nonfree 7.1 marchv3 extopt
     steps:
       - name: Free Disk-Space
         run: df -h && sudo apt-get clean && docker system prune -a -f && sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc && df -h
@@ -218,17 +232,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        target: [linux64]
+        variant:
+          [
+            nonfree 7.1 extopt lto extlto,
+            nonfree 7.1 extopt lto,
+            nonfree 7.1 extopt,
+            nonfree 7.1 lto extlto,
+            nonfree 7.1 lto,
+            nonfree 7.1 marchv3 extopt lto extlto,
+            nonfree 7.1 marchv3 extopt lto,
+            nonfree 7.1 marchv3 extopt,
+            nonfree 7.1 marchv3 lto extlto,
+            nonfree 7.1 marchv3 lto,
+            nonfree 7.1 marchv3,
+            nonfree 7.1,
+          ]
         include:
           - target: win64
             variant: nonfree 7.1
-          - target: linux64
-            variant: nonfree 7.1 optv3 lto
-          - target: linux64
-            variant: nonfree 7.1 optv3
-          - target: linux64
-            variant: nonfree 7.1 lto
-          - target: linux64
-            variant: nonfree 7.1
+          - target: win64
+            variant: nonfree 7.1 marchv3
+          - target: win64
+            variant: nonfree 7.1 extopt
+          - target: win64
+            variant: nonfree 7.1 marchv3 extopt
     steps:
       - name: Free Disk-Space
         run: df -h && sudo apt-get clean && docker system prune -a -f && sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc && df -h
