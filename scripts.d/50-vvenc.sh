@@ -11,14 +11,16 @@ ffbuild_enabled() {
 
 ffbuild_dockerbuild() {
     mkdir build && cd build
+    export CFLAGS="${CFLAGS//-flto=auto -falign-functions=32/}"
+    export CXXFLAGS="${CXXFLAGS//-flto=auto -falign-functions=32/}"
 
     local armsimd=()
     if [[ $TARGET == *arm* ]]; then
         armsimd+=(-DVVENC_ENABLE_ARM_SIMD=ON)
 
         if [[ "$CC" != *clang* ]]; then
-            export CFLAGS="${CFLAGS//-flto=auto -falign-functions=32/} -fpermissive -Wno-error=uninitialized -Wno-error=maybe-uninitialized"
-            export CXXFLAGS="${CXXFLAGS//-flto=auto -falign-functions=32/} -fpermissive -Wno-error=uninitialized -Wno-error=maybe-uninitialized"
+            export CFLAGS="${CFLAGS} -fpermissive -Wno-error=uninitialized -Wno-error=maybe-uninitialized"
+            export CXXFLAGS="${CXXFLAGS} -fpermissive -Wno-error=uninitialized -Wno-error=maybe-uninitialized"
         fi
     fi
 
