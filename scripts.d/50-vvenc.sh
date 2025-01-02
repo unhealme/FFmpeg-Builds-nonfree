@@ -11,8 +11,8 @@ ffbuild_enabled() {
 
 ffbuild_dockerbuild() {
     mkdir build && cd build
-    export CFLAGS="${CFLAGS//-flto=auto -falign-functions=32/}"
-    export CXXFLAGS="${CXXFLAGS//-flto=auto -falign-functions=32/}"
+    export CFLAGS="${CFLAGS//-flto=auto/}"
+    export CXXFLAGS="${CXXFLAGS//-flto=auto/}"
 
     local armsimd=()
     if [[ $TARGET == *arm* ]]; then
