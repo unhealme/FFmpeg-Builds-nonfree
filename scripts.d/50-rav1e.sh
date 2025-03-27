@@ -31,9 +31,9 @@ ffbuild_dockerbuild() {
     export "CC_${FFBUILD_RUST_TARGET//-/_}"="${CC}"
     export "CXX_${FFBUILD_RUST_TARGET//-/_}"="${CXX}"
     export "LD_${FFBUILD_RUST_TARGET//-/_}"="${LD}"
-    export "CFLAGS_${FFBUILD_RUST_TARGET//-/_}"="${CFLAGS}"
-    export "CXXFLAGS_${FFBUILD_RUST_TARGET//-/_}"="${CXXFLAGS}"
-    export "LDFLAGS_${FFBUILD_RUST_TARGET//-/_}"="${LDFLAGS}"
+    export "CFLAGS_${FFBUILD_RUST_TARGET//-/_}"="${CFLAGS//-flto=auto/}"
+    export "CXXFLAGS_${FFBUILD_RUST_TARGET//-/_}"="${CXXFLAGS//-flto=auto/}"
+    export "LDFLAGS_${FFBUILD_RUST_TARGET//-/_}"="${LDFLAGS//-flto=auto/}"
     unset AR RANLIB NM CC CXX LD CFLAGS CXXFLAGS LDFLAGS
 
     cargo cinstall -v "${myconf[@]}"
