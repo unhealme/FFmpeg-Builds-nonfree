@@ -9,6 +9,6 @@ if [[ "$TARGET" == 'linux64' ]]; then
 fi
 
 ffbuild_dockeraddin() {
-    to_df 'ENV CFLAGS="$CFLAGS -O3" CXXFLAGS="$CXXFLAGS -O3"'
-    to_df 'ENV RUSTFLAGS="${RUSTFLAGS} -Copt-level=3 -Clink-arg=-z -Clink-arg=pack-relative-relocs -Ccodegen-units=1"'
+    to_df 'ENV CFLAGS="$CFLAGS -O3" CXXFLAGS="$CXXFLAGS -O3" FFLAGS="$FFLAGS -O3" FCFLAGS="$FCFLAGS -O3"'
+    to_df 'ENV RUSTFLAGS="${RUSTFLAGS} -Cforce-frame-pointers=yes -Copt-level=3 -Clink-arg=-z -Clink-arg=pack-relative-relocs -Ccodegen-units=1"'
 }
