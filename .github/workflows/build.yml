@@ -162,8 +162,6 @@ jobs:
             nonfree 7.1 marchv3 lto extlto,
             nonfree 7.1 marchv3 lto,
             nonfree 7.1 marchv3,
-            nonfree 7.1 marchv4 extopt,
-            nonfree 7.1 marchv4,
             nonfree 7.1,
           ]
         include:
@@ -253,8 +251,6 @@ jobs:
             nonfree 7.1 marchv3 lto extlto,
             nonfree 7.1 marchv3 lto,
             nonfree 7.1 marchv3,
-            nonfree 7.1 marchv4 extopt,
-            nonfree 7.1 marchv4,
             nonfree 7.1,
           ]
         include:
