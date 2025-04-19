@@ -1,7 +1,6 @@
 #!/bin/bash
 set -xe
 
-/usr/lib/ld-linux-x86-64.so.2 --help # check cpu capability
 export RAW_CFLAGS="$CFLAGS"
 export RAW_CXXFLAGS="$CXXFLAGS"
 export RAW_LDFLAGS="$LDFLAGS"
